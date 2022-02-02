@@ -1,0 +1,14 @@
+main > div {
+  width: 100%;
+  margin: 1vw;
+  /* background-color: aqua; */
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.error {
+  background-color: orangered;
+}
