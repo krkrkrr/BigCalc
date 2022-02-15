@@ -57,74 +57,74 @@ class Calculator {
         }
     }
 
-    /**
-     * 数式がエラーを起こすものでないか確認する
-     * 演算子、数字以外の文字が含まれていないか
-     * 数字が連続していたり、記号が連続していたりしていないか
-     * 括弧が閉じているか
-     * @returns {boolean} 
-     */
-    isValidate(ary = this._infix_notation) {
-        let is_pre_number = false
-        let is_pre_unary = false
-        let is_pre_start_group = false
-        let is_pre_end_group = false
-        let group_depth = 0
-        for(const s of ary) {
-            // console.log(s)
-            if(this._get_priority(s) > 0) {
-                if(this._get_priority(s) == 21) {
-                    group_depth += this._is_group_symbol(s)
-                    if(group_depth < 0) {
-                        return false
-                    }
-                    if(this._is_group_symbol(s) > 0) {
-                        if(is_pre_number) {
-                            return false
-                        }
-                        is_pre_start_group = true
-                    } else {
-                        if(!is_pre_number && !is_pre_end_group) {
-                            return false
-                        }
-                        is_pre_end_group = true
-                    }
-                } else {
-                    if(!is_pre_number) {
-                        if(this._get_priority(s) == 14) {
-                            if(is_pre_unary) {
-                                return false
-                            } else {
-                                is_pre_unary = true
-                            }
-                        } else {
-                            return false
-                        }
-                    }
-                    is_pre_number = false
-                    is_pre_start_group = false
-                    is_pre_end_group = false
-                }
-            } else if(!Number.isNaN(Number(s))) {
-                if(is_pre_end_group) {
-                    return false
-                }
-                if(is_pre_number) {
-                    return false
-                }
-                is_pre_unary = false
-                is_pre_number = true
-                is_pre_start_group = false
-                is_pre_end_group = false
-            } else {
-                return false
-            }
-        }
-        if(group_depth != 0) {
-            return false
-        }
-        return true
-    }
+    // /**
+    //  * 数式がエラーを起こすものでないか確認する
+    //  * 演算子、数字以外の文字が含まれていないか
+    //  * 数字が連続していたり、記号が連続していたりしていないか
+    //  * 括弧が閉じているか
+    //  * @returns {boolean} 
+    //  */
+    // isValidate(ary = this._infix_notation) {
+    //     let is_pre_number = false
+    //     let is_pre_unary = false
+    //     let is_pre_start_group = false
+    //     let is_pre_end_group = false
+    //     let group_depth = 0
+    //     for(const s of ary) {
+    //         // console.log(s)
+    //         if(this._get_priority(s) > 0) {
+    //             if(this._get_priority(s) == 21) {
+    //                 group_depth += this._is_group_symbol(s)
+    //                 if(group_depth < 0) {
+    //                     return false
+    //                 }
+    //                 if(this._is_group_symbol(s) > 0) {
+    //                     if(is_pre_number) {
+    //                         return false
+    //                     }
+    //                     is_pre_start_group = true
+    //                 } else {
+    //                     if(!is_pre_number && !is_pre_end_group) {
+    //                         return false
+    //                     }
+    //                     is_pre_end_group = true
+    //                 }
+    //             } else {
+    //                 if(!is_pre_number) {
+    //                     if(this._get_priority(s) == 14) {
+    //                         if(is_pre_unary) {
+    //                             return false
+    //                         } else {
+    //                             is_pre_unary = true
+    //                         }
+    //                     } else {
+    //                         return false
+    //                     }
+    //                 }
+    //                 is_pre_number = false
+    //                 is_pre_start_group = false
+    //                 is_pre_end_group = false
+    //             }
+    //         } else if(!Number.isNaN(Number(s))) {
+    //             if(is_pre_end_group) {
+    //                 return false
+    //             }
+    //             if(is_pre_number) {
+    //                 return false
+    //             }
+    //             is_pre_unary = false
+    //             is_pre_number = true
+    //             is_pre_start_group = false
+    //             is_pre_end_group = false
+    //         } else {
+    //             return false
+    //         }
+    //     }
+    //     if(group_depth != 0) {
+    //         return false
+    //     }
+    //     return true
+    // }
 
     /**
      * 中置記法の配列を取得
@@ -223,7 +223,7 @@ class Calculator {
                 }
             }
         }
-        console.log(res)
+        // console.log(res)
         return res
     }
 
@@ -245,13 +245,89 @@ class Calculator {
         return 0;
     }
 
-    get reverse_polish_notation() {
-        const queue = new Queue();
-        const stack = new Stack();
+    /**
+     * 逆ポーランド記法に変換する
+     * @param {Array<Number, str>} ary 中間値記法の配列
+     * @returns {Array<Number, str>} 逆ポーランド記法の配列
+     */
+    shuntingYard(ary = this._to_number()) {
+        const stack = new Stack()
+        const rpn = new Queue()
+        for(const token of ary) {
+            const priority = this._get_priority(token)
+            if(priority == 0) {
+                rpn.enqueue(token)
+            } else if(priority == 21) {
+                if(this._is_group_symbol(token) > 0) {
+                    stack.push(token)
+                } else {
+                    while(!stack.isEmpty()) {
+                        const opr = stack.pop()
+                        if(this._is_group_symbol(opr) == 0) {
+                            rpn.enqueue(opr)
+                        } else {
+                            break
+                        }
+                    }
+                    
+                }
+            } else {
+                while(!stack.isEmpty() && this._get_priority(stack.peek()) >= priority && this._get_priority(stack.peek()) != 21) {
+                    rpn.enqueue(stack.pop())
+                }
+                stack.push(token)
+            }
+        }
+        while(!stack.isEmpty()) {
+            rpn.enqueue(stack.pop())
+        }
+        return rpn
     }
 
-    _split_binary_tree() {
 
+    /**
+     * 逆ポーランド記法の計算
+     * @param {Array<Number, str>} rpn 逆ポーランド記法
+     * @returns {Number} 演算結果
+     */
+    calcRpn(rpn = this.shuntingYard()) {
+        const stack = new Stack()
+        for(const token of rpn) {
+            if(Number.isFinite(token)) {
+                stack.push(token)
+            } else {
+                const right_num = stack.pop()
+                const left_num = stack.isEmpty()
+                    ? 0
+                    : stack.pop()
+                switch(token) {
+                    case '+':
+                        stack.push(left_num+right_num)
+                        break
+                    case '-':
+                        stack.push(left_num-right_num)
+                        break
+                    case '*':
+                        stack.push(left_num*right_num)
+                        break
+                    case '/':
+                        stack.push(left_num/right_num)
+                        break
+                    case '%':
+                        stack.push(left_num%right_num)
+                        break
+                    case '**':
+                        stack.push(left_num**right_num)
+                        break
+                    case '=':
+                        break
+                    default:
+                        throw Error("未知の記号が含まれています。")
+                }
+            }
+        }
+        console.log(stack)
+        return stack[0]
     }
 
     /**
@@ -263,86 +339,13 @@ class Calculator {
             this.print("数式を入力してください。")
             return false
         }
-        if(!this.isValidate()) {
+        try{
+            this.color(false)
+            this.print(this.calcRpn())
+        } catch(err) {
+            this.print(err.message)
             this.color()
-            return false
         }
-        this.color(false)
-        const ans = this.groupInfixNotation()
-        this.print(ans)
-        return ans
-    }
-}
-
-/**
- * BinaryTree
- * @classdesc 二分探索木 左の子<親<=右の子
- * @param {Array<string>} value 
- * @param parent 親
- * @param right 右の子
- * @param left 左の子
- */
-class ReversePolandBinaryTree {
-    constructor(ary) {
-        this.parent;
-        this.right;
-        this.left;
-        this.value;
-        this._split_infix_notation(ary);
-    }
-
-    /**
-     * 中間置記法を二分
-     * @param {Array<string>} ary 中間置記法
-     */
-    _split_infix_notation(ary) {
-        let min_priority_symbol = 100;
-        let min_priority_symbol_index = -1;
-        ary.forEach((str, index) => {
-            const priority = this._judge_priority(str);
-            if(priority > 0 && priority < min_priority_symbol) {
-                min_priority_symbol = priority;
-                min_priority_symbol_index = index;
-            }
-        });
-    }
-
-    
-
-    /**
-     * 演算子の優先順位を返す
-     * 数字: 0
-     * 例外: -1
-     * @param {string} str 記号か数字
-     * @returns {int} 降順の優先順位
-     */
-    _judge_priority(str) {
-        res = -1
-        switch(str) {
-            case "(":
-            case ")":
-                res = 21
-                break
-            case "**":
-                res = 16
-                break
-            case "*":
-            case "/":
-            case "%":
-                res = 15
-                break
-            case "+":
-            case "-":
-                res = 14
-                break
-            case "=":
-                res = 3
-                break
-        }
-        if(res < 0 && !(Number.isNaN(Number(str)))) {
-            res = 0
-        }
-        return res;
     }
 }
 

@@ -42,6 +42,6 @@ function onInput(event) {
     // 入力されている文字列を取得
     // console.log(event.target.value);
     // debug(event.target.value);
-    const calc = new Calculator(event.target.value);
-    console.log(calc.run());
+    const calc = new Calculator(event.target.value)
+    calc.run()
 }
