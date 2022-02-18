@@ -228,6 +228,58 @@ class Calculator {
             if(Number.isFinite(token)) {
                 stack.push(token)
             } else {
+                const right_num = stack.pop()
+                const left_num = stack.isEmpty()
+                    ? 0
+                    : stack.pop()
+                switch(token) {
+                    case '+':
+                        stack.push(left_num+right_num)
+                        break
+                    case '-':
+                        stack.push(left_num-right_num)
+                        break
+                    case '*':
+                        stack.push(left_num*right_num)
+                        break
+                    case '/':
+                        stack.push(left_num/right_num)
+                        break
+                    case '%':
+                        stack.push(left_num%right_num)
+                        break
+                    case '**':
+                        stack.push(left_num**right_num)
+                        break
+                    case '=':
+                        stack.push(right_num)
+                        break
+                    default:
+                        throw Error(this.lang.message_unknown_symbol)
+                }
+            }
+        }
+        let ans = stack[0]
+        if(Math.abs(ans) > Number.MAX_SAFE_INTEGER) {
+            ans = this.calcRpnBigInt(rpn)
+        } else {
+            ans = this._floorRoundOffError(ans)
+        }
+        return ans
+    }
+
+    /**
+     * 逆ポーランド記法の計算
+     * 2**53-1より大きい場合
+     * @param {Array<Number, str>} rpn 逆ポーランド記法
+     * @returns {Number} 演算結果
+     */
+     calcRpnBigInt(rpn = this.shuntingYard()) {
+        const stack = new Stack()
+        for(const token of rpn) {
+            if(Number.isFinite(token)) {
+                stack.push(token)
+            } else {
                 const right_num = BigInt(stack.pop())
                 const left_num = stack.isEmpty()
                     ? BigInt(0)
@@ -262,15 +314,19 @@ class Calculator {
         return stack[0]
     }
 
-    floorRoundOffError(num) {
-        if(Number.isInteger(num)) {
-            return num
-        } else {
+    /**
+     * 丸め誤差を有効数字10桁で切り捨て
+     * @param {Number} num 丸め誤差含む計算結果
+     * @returns 
+     */
+    _floorRoundOffError(num) {
+        if(!Number.isInteger(num)) {
             const available_range = 10
             const diff = available_range
                 -(String(Math.floor(num))).length
-            
+            num = (Math.floor(num*(10**diff)))/(10**diff)
         }
+        return num
     }
 
     /**
