@@ -3,6 +3,8 @@
  * 
  */
 window.addEventListener("load", event => {
+    (new SelectLanguage())
+        .onLoad(document.getElementById("language-select"))
     // キー入力イベントに紐付け
     document.getElementById("input_formula")
         .addEventListener("input", onInput);

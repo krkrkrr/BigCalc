@@ -21,10 +21,12 @@ class Test {
      */
     log() {
         console.log("____start test____")
+        console.log("____calc____")
         this._cases.forEach(input => {
-            console.log(input);
-            console.log((new Calculator(input)).run());
+            console.log(input)
+            console.log((new Calculator(input)).run())
         });
-        console.log("____finish test____");
+        console.log("____lang____")
+        console.log("____finish test____")
     }
 }

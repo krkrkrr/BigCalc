@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="script/style.css">
     <script src="script/test.js"></script>
+    <script src="script/cookie.js"></script>
+    <script src="script/language.js"></script>
     <script src="script/calculator.js"></script>
     <script src="script/main.js"></script>
     <title>電卓</title>
 </head>
+
 <body>
     <main>
         <div>
@@ -19,5 +23,17 @@
             ここに表示される。
         </div>
     </main>
+    <footer>
+        <form class="language-menu">
+            <fieldset id="select-language">
+                <legend>Change your language</legend>
+                <select name="language" id="language-select">
+                    <option value="ja">日本語</option>
+                    <option value="en-US">English (US)</option>
+                </select>
+            </fieldset>
+        </form>
+    </footer>
 </body>
+
 </html>

@@ -12,3 +12,11 @@ input {
 .error {
   background-color: orangered;
 }
+
+/* footer */
+/* select-language */
+legend {
+  background-color: #000;
+  color: #fff;
+  padding: 3px 6px;
+}

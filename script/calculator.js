@@ -22,6 +22,7 @@ class Calculator {
             '=': 3
         }
         this._output = document.getElementById("output_answer")
+        this.lang = new SelectLanguage()
     }
 
     /**
@@ -56,75 +57,6 @@ class Calculator {
             return false
         }
     }
-
-    // /**
-    //  * 数式がエラーを起こすものでないか確認する
-    //  * 演算子、数字以外の文字が含まれていないか
-    //  * 数字が連続していたり、記号が連続していたりしていないか
-    //  * 括弧が閉じているか
-    //  * @returns {boolean} 
-    //  */
-    // isValidate(ary = this._infix_notation) {
-    //     let is_pre_number = false
-    //     let is_pre_unary = false
-    //     let is_pre_start_group = false
-    //     let is_pre_end_group = false
-    //     let group_depth = 0
-    //     for(const s of ary) {
-    //         // console.log(s)
-    //         if(this._get_priority(s) > 0) {
-    //             if(this._get_priority(s) == 21) {
-    //                 group_depth += this._is_group_symbol(s)
-    //                 if(group_depth < 0) {
-    //                     return false
-    //                 }
-    //                 if(this._is_group_symbol(s) > 0) {
-    //                     if(is_pre_number) {
-    //                         return false
-    //                     }
-    //                     is_pre_start_group = true
-    //                 } else {
-    //                     if(!is_pre_number && !is_pre_end_group) {
-    //                         return false
-    //                     }
-    //                     is_pre_end_group = true
-    //                 }
-    //             } else {
-    //                 if(!is_pre_number) {
-    //                     if(this._get_priority(s) == 14) {
-    //                         if(is_pre_unary) {
-    //                             return false
-    //                         } else {
-    //                             is_pre_unary = true
-    //                         }
-    //                     } else {
-    //                         return false
-    //                     }
-    //                 }
-    //                 is_pre_number = false
-    //                 is_pre_start_group = false
-    //                 is_pre_end_group = false
-    //             }
-    //         } else if(!Number.isNaN(Number(s))) {
-    //             if(is_pre_end_group) {
-    //                 return false
-    //             }
-    //             if(is_pre_number) {
-    //                 return false
-    //             }
-    //             is_pre_unary = false
-    //             is_pre_number = true
-    //             is_pre_start_group = false
-    //             is_pre_end_group = false
-    //         } else {
-    //             return false
-    //         }
-    //     }
-    //     if(group_depth != 0) {
-    //         return false
-    //     }
-    //     return true
-    // }
 
     /**
      * 中置記法の配列を取得
@@ -296,10 +228,10 @@ class Calculator {
             if(Number.isFinite(token)) {
                 stack.push(token)
             } else {
-                const right_num = stack.pop()
+                const right_num = BigInt(stack.pop())
                 const left_num = stack.isEmpty()
-                    ? 0
-                    : stack.pop()
+                    ? BigInt(0)
+                    : BigInt(stack.pop())
                 switch(token) {
                     case '+':
                         stack.push(left_num+right_num)
@@ -320,14 +252,25 @@ class Calculator {
                         stack.push(left_num**right_num)
                         break
                     case '=':
+                        stack.push(right_num)
                         break
                     default:
-                        throw Error("未知の記号が含まれています。")
+                        throw Error(this.lang.message_unknown_symbol)
                 }
             }
         }
-        console.log(stack)
         return stack[0]
+    }
+
+    floorRoundOffError(num) {
+        if(Number.isInteger(num)) {
+            return num
+        } else {
+            const available_range = 10
+            const diff = available_range
+                -(String(Math.floor(num))).length
+            
+        }
     }
 
     /**
@@ -336,15 +279,13 @@ class Calculator {
      */
     run() {
         if(this.isEmpty()) {
-            this.print("数式を入力してください。")
+            this.print(this.lang.message_empty)
             return false
         }
         try{
-            this.color(false)
             this.print(this.calcRpn())
         } catch(err) {
             this.print(err.message)
-            this.color()
         }
     }
 }
