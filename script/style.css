@@ -1,22 +1,31 @@
+body {
+  margin: 20px;
+}
+
 main > div {
   width: 100%;
   overflow-wrap: break-word;
+  padding-bottom: 10px;
   /* background-color: aqua; */
 }
 
 input {
   width: 100%;
   box-sizing: border-box;
-}
-
-.error {
-  background-color: orangered;
+  height: 40px;
+  font-size: 36px;
 }
 
 /* footer */
+footer {
+  /* display: flex; */
+  /* flex-direction: row-reverse; */
+  text-align: right;
+}
 /* select-language */
 legend {
   background-color: #000;
   color: #fff;
   padding: 3px 6px;
+  font-size: small;
 }

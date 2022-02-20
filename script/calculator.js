@@ -280,10 +280,11 @@ class Calculator {
             if(Number.isFinite(token)) {
                 stack.push(token)
             } else {
-                const right_num = BigInt(stack.pop())
+                const right_num
+                    = this._convertBigint(stack.pop())
                 const left_num = stack.isEmpty()
                     ? BigInt(0)
-                    : BigInt(stack.pop())
+                    : this._convertBigint(stack.pop())
                 switch(token) {
                     case '+':
                         stack.push(left_num+right_num)
@@ -324,9 +325,24 @@ class Calculator {
             const available_range = 10
             const diff = available_range
                 -(String(Math.floor(num))).length
-            num = (Math.floor(num*(10**diff)))/(10**diff)
+            num = (Math.round(num*(10**diff)))/(10**diff)
         }
         return num
+    }
+
+    /**
+     * BigInt型に変換
+     * @param {Number, BigInt} num int or float or bigint
+     * @returns {BigInt} BigInt型に変換した
+     */
+    _convertBigint(num) {
+        if(typeof num === "bigint") {
+            return num
+        } else if(Number.isInteger(num)) {
+            return BigInt(num)
+        } else {
+            return BigInt(Math.round(num))
+        }
     }
 
     /**

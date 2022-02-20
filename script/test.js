@@ -24,7 +24,9 @@ class Test {
         console.log("____calc____")
         this._cases.forEach(input => {
             console.log(input)
-            console.log((new Calculator(input)).run())
+            const calc = new Calculator(input)
+            console.log(calc._to_number)
+            console.log(calc.run())
         });
         console.log("____lang____")
         console.log("____finish test____")
