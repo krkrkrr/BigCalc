@@ -1,19 +1,32 @@
-body {
-  margin: 20px;
+/* レスポンシブ対応 */
+@media screen and (max-width: 900px) {
+  body {
+    margin: 4vw;
+    font-size: 3vw;
+    max-width: 900px;
+  }
 }
 
+@media screen and (min-width: 901px) {
+  body {
+    margin: 2vh;
+    font-size: 1.8vh;
+    max-width: 54vh;
+  }
+}
+
+/* 基本のレイアウト */
 main > div {
   width: 100%;
   overflow-wrap: break-word;
-  padding-bottom: 10px;
-  /* background-color: aqua; */
+  padding-bottom: 2%;
 }
 
 input {
   width: 100%;
   box-sizing: border-box;
-  height: 40px;
-  font-size: 36px;
+  height: 2.2em;
+  font-size: 2em;
 }
 
 /* push button */
@@ -23,7 +36,7 @@ input {
   text-align: center;
   vertical-align: middle;
   align-items: center;
-  font-size: 4vw;
+  font-size: 4em;
 }
 
 .button_row {
@@ -33,10 +46,10 @@ input {
 }
 
 .button_row > div {
-  width: 20vw;
-  height: 10vw;
-  padding-top: 4vw;
-  margin: 2vw;
+  width: 1.7em;
+  height: 1.8em;
+  margin: 0.1em;
+  padding-top: 0.4em;
   background-color: rgba(128, 128, 128, 0.247);
 }
 
@@ -46,6 +59,7 @@ footer {
   /* flex-direction: row-reverse; */
   text-align: right;
 }
+
 /* select-language */
 legend {
   background-color: #000;
