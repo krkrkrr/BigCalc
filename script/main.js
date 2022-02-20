@@ -53,10 +53,14 @@ function onInput(event) {
  * @param {Event} event 
  */
 function onClick(event) {
-    document.getElementById("input_formula").value
-        += event.target.textContent.length < 3
-            ? event.target.textContent
-            : ""
+    const val = event.target.textContent
+    const input = document.getElementById("input_formula").value
+    if(val.length == 1) {
+        document.getElementById("input_formula").value += val    
+    } else if(val == "Del") {
+        document.getElementById("input_formula").value
+            = input.slice(0, -1)
+    }
     const calc = new Calculator(document.getElementById("input_formula").value)
     calc.run()
 }
