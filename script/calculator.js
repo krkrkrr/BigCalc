@@ -248,6 +248,7 @@ class Calculator {
                     case '%':
                         stack.push(left_num%right_num)
                         break
+                    case '^':
                     case '**':
                         stack.push(left_num**right_num)
                         break
@@ -301,6 +302,7 @@ class Calculator {
                     case '%':
                         stack.push(left_num%right_num)
                         break
+                    case '^':
                     case '**':
                         stack.push(left_num**right_num)
                         break

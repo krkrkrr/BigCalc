@@ -16,6 +16,30 @@ input {
   font-size: 36px;
 }
 
+/* push button */
+#button_table {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  font-size: 4vw;
+}
+
+.button_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.button_row > div {
+  width: 20vw;
+  height: 10vw;
+  padding-top: 4vw;
+  margin: 2vw;
+  background-color: rgba(128, 128, 128, 0.247);
+}
+
 /* footer */
 footer {
   /* display: flex; */

@@ -71,15 +71,15 @@ class SelectLanguage {
         if(this.lang == "ja") {
             return "数式を入力してください。"
         } else {
-            return "Please enter formula."
+            return "Please enter the formula."
         }
     }
 
     get message_unknown_symbol() {
         if(this.lang == "ja") {
-            return "未知の記号が含まれています。"
+            return "使えない記号が含まれています。"
         } else {
-            return "include unknown symbols."
+            return "Contains unknown symbols."
         }
     }
 }

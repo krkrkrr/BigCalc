@@ -7,9 +7,12 @@ window.addEventListener("load", event => {
         .onLoad(document.getElementById("language-select"))
     // キー入力イベントに紐付け
     document.getElementById("input_formula")
-        .addEventListener("input", onInput);
+        .addEventListener("input", onInput)
+    // ボタン操作
+    document.getElementById("button_table")
+        .addEventListener("click", onClick)
     // テストの実行
-    (new Test()).log();
+    // (new Test()).log();
 }, checkEventListenerOption() ? {passive: true} : false);
 
 /**
@@ -36,14 +39,24 @@ function checkEventListenerOption() {
 
 /**
  * キー入力時の実行関数
+ * 計算の実行と出力
  * @param {Event} event 
  */
 function onInput(event) {
-    // 入力したキーを取得
-    // console.log(event.data);
-    // 入力されている文字列を取得
-    // console.log(event.target.value);
-    // debug(event.target.value);
     const calc = new Calculator(event.target.value)
+    calc.run()
+}
+
+/**
+ * ボタン操作
+ * 入力と計算の実行と出力
+ * @param {Event} event 
+ */
+function onClick(event) {
+    document.getElementById("input_formula").value
+        += event.target.textContent.length < 3
+            ? event.target.textContent
+            : ""
+    const calc = new Calculator(document.getElementById("input_formula").value)
     calc.run()
 }
