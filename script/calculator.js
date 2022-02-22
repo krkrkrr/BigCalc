@@ -31,6 +31,15 @@ class Calculator {
      */
     print(str) {
         this._output.textContent = str
+        const size = String(str).length
+        if(size < 11) {
+            this._output.style.fontSize = "4em"
+        } else if(size < 21) {
+            this._output.style.fontSize = "2em"
+        } else {
+            this._output.style.fontSize = "1em"
+        }
+        console.log(size)
     }
 
     /**

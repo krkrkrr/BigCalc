@@ -27,6 +27,18 @@ input {
   box-sizing: border-box;
   height: 2.2em;
   font-size: 2em;
+  border: 4px solid teal;
+  border-radius: 10px;
+  /* box-shadow: 4px -4px 0 5px teal; */
+}
+
+input:focus {
+  outline: 0;
+}
+
+#output_answer {
+  font-size: 4em;
+  min-height: 8rem;
 }
 
 /* push button */
@@ -42,16 +54,35 @@ input {
 .button_row {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .button_row > div {
-  width: 1.7em;
-  height: 1.8em;
+  width: 1.78em;
+  color: rgba(0, 0, 0, 0.959);
   margin: 0.1em;
-  padding-top: 0.4em;
-  background-color: rgba(128, 128, 128, 0.247);
+  border-radius: 10%;
+  box-shadow: 6px -6px teal;
 }
+
+.button_row > div:active {
+  box-shadow: 3px -3px teal;
+  position: relative;
+  top: -3px;
+  left: 3px;
+}
+
+.button_row > .null_button {
+  box-shadow: 0 0 white;
+}
+
+/* #button_table > div:nth-last-child(1) > div {
+  background-color: rgba(51, 137, 236, 0.048);
+}
+
+#button_table > div > div:nth-last-child(1) {
+  background-color: rgba(51, 137, 236, 0.048);
+} */
 
 /* footer */
 footer {
@@ -62,8 +93,8 @@ footer {
 
 /* select-language */
 legend {
-  background-color: #000;
-  color: #fff;
+  background-color: black;
+  color: white;
   padding: 3px 6px;
   font-size: small;
 }
