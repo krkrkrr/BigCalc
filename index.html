@@ -8,7 +8,14 @@
     <meta name="author" content="krkrkrrn">
     <meta name="description" content="This is calculator with bigint.">
     <link rel="shortcut icon" href="media/favicon.svg" type="image/x-icon">
+
+    <!-- google fonts import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="script/style.css">
+
     <script src="script/test.js"></script>
     <script src="script/cookie.js"></script>
     <script src="script/language.js"></script>
@@ -17,11 +24,11 @@
     <title>電卓</title>
 </head>
 
-<body>
+<body class="basic-text">
     <main>
         <div id="display_io">
             <div id="display_input">
-                <input type="text" name="formula" id="input_formula">
+                <input type="text" name="formula" id="input_formula" class="basic-text">
             </div>
             <div id="output_answer">
                 0
@@ -101,14 +108,11 @@
         </div>
     </main>
     <footer>
-        <form class="language-menu">
-            <fieldset id="select-language">
-                <legend>Change your language</legend>
-                <select name="language" id="language-select">
-                    <option value="ja">日本語</option>
-                    <option value="en-US">English (US)</option>
-                </select>
-            </fieldset>
+        <form id="select-language">
+            <select name="language" id="language-select" class="basic-text">
+                <option value="ja">日本語</option>
+                <option value="en-US">English (US)</option>
+            </select>
         </form>
     </footer>
 </body>
