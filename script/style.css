@@ -82,12 +82,10 @@ input:focus {
 /* footer */
 footer {
   text-align: right;
+  margin-top: 1em;
 }
 
 /* select-language */
-footer {
-  margin-top: 1em;
-}
 #select-language select {
   box-shadow: 3px -3px teal;
   border: 0px;
