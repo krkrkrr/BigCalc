@@ -1,24 +1,36 @@
+:root {
+  --accent-color: teal;
+  --background-color: black;
+  --text-color: azure;
+}
+
 /* レスポンシブ対応 */
 @media screen and (max-width: 900px) {
   body {
     margin: 4vw;
-    font-size: 3vw;
     max-width: 900px;
+  }
+
+  .basic-text {
+    font-size: 3vw;
   }
 }
 
 @media screen and (min-width: 901px) {
   body {
     margin: 2vh;
-    font-size: 1.8vh;
     max-width: 54vh;
+  }
+
+  .basic-text {
+    font-size: 1.8vh;
   }
 }
 
 .basic-text {
-  background-color: black;
+  background-color: var(--background-color);
   font-family: "Shippori Mincho B1", serif;
-  color: azure;
+  color: var(--text-color);
 }
 
 /* 基本のレイアウト */
@@ -45,38 +57,40 @@ input:focus {
   min-height: 8rem;
 }
 
+#output_digit {
+  opacity: 80%;
+  text-align: right;
+}
+
 /* push button */
 #button_table {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  table-layout: fixed;
+  font-size: 4em;
   text-align: center;
   vertical-align: middle;
-  align-items: center;
-  font-size: 4em;
+  /* display: flex;
+  flex-direction: column;
+  text-align: center;
+  vertical-align: middle; */
+  /* align-items: center; */
 }
 
-.button_row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.button_row > div {
-  width: 1.78em;
-  margin: 0.1em;
+.button_row div {
   border-radius: 10%;
-  box-shadow: 6px -6px teal;
+  box-shadow: 0.08em -0.08em var(--accent-color);
+  margin: 0.1em;
 }
 
-.button_row > div:active {
-  box-shadow: 3px -3px teal;
+.button_row div:active {
+  box-shadow: 0.04em -0.04em var(--accent-color);
   position: relative;
-  top: -3px;
-  left: 3px;
+  top: -0.04em;
+  left: 0.04em;
 }
 
 .button_row > .null_button {
-  box-shadow: 0 0 azure;
+  box-shadow: 0 0 var(--text-color);
 }
 
 /* footer */
@@ -87,6 +101,6 @@ footer {
 
 /* select-language */
 #select-language select {
-  box-shadow: 3px -3px teal;
+  box-shadow: 0.32em -0.32em var(--accent-color);
   border: 0px;
 }

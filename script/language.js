@@ -82,4 +82,12 @@ class SelectLanguage {
             return "Contains unknown symbols."
         }
     }
+
+    get digit_unit() {
+        if(this.lang == "ja") {
+            return "桁"
+        } else {
+            return "digit"
+        }
+    }
 }

@@ -22,6 +22,7 @@ class Calculator {
             '=': 3
         }
         this._output = document.getElementById("output_answer")
+        this._output_digit = document.getElementById("output_digit")
         this.lang = new SelectLanguage()
     }
 
@@ -357,6 +358,16 @@ class Calculator {
     }
 
     /**
+     * 桁数を出力
+     * @param {Number, BigInt} num 数字
+     */
+    printDigit(num) {
+        this._output_digit.textContent
+            = (String(num)).replace("-", "").length
+            +" "+this.lang.digit_unit
+    }
+
+    /**
      * 計算結果の出力
      * @returns {string} 計算結果
      */
@@ -366,7 +377,9 @@ class Calculator {
             return false
         }
         try{
-            this.print(this.calcRpn())
+            const ans = this.calcRpn()
+            this.print(ans)
+            this.printDigit(ans)
         } catch(err) {
             this.print(err.message)
         }
