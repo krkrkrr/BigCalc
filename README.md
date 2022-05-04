@@ -22,7 +22,7 @@
 
 ## 作者 Author
 
-[@krkrkrkrrn](https://twitter.com/krkrkrrn__3)
+[@krkrkrrn__3](https://twitter.com/krkrkrrn__3)
 
 ## ライセンス Licence
 
