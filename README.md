@@ -1,4 +1,4 @@
-# [BIG calculator](https://krkrkrrn.github.io/BIG-calculator/)
+# [BigCalc](https://krkrkrrn.github.io/BigCalc/)
 
 ## 概要 Overview
 
