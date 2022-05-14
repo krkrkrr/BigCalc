@@ -2,7 +2,7 @@
 
 ## 概要 Overview
 
-[公開ページ](https://krkrkrrn.github.io/BIG-calculator/)
+[公開ページ](https://krkrkrrn.github.io/BigCalc/)
 
 `(1+1)*2` や `2**1000` が、計算できる電卓です。
 
