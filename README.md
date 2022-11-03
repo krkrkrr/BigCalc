@@ -1,8 +1,8 @@
-# [BigCalc](https://krkrkrrn.github.io/BigCalc/)
+# [BigCalc](https://cool-omb.github.io/BigCalc/)
 
 ## 概要 Overview
 
-[公開ページ](https://krkrkrrn.github.io/BigCalc/)
+[公開ページ](https://cool-omb.github.io/BigCalc/)
 
 `(1+1)*2` や `2**1000` が、計算できる電卓です。
 
@@ -22,7 +22,7 @@
 
 ## 作者 Author
 
-[@krkrkrrn__3](https://twitter.com/krkrkrrn__3)
+[@cool_omb](https://twitter.com/cool_omb)
 
 ## ライセンス Licence
 
