@@ -2,7 +2,7 @@
 
 ## 概要 Overview
 
-[公開ページ](https://cool-omb.github.io/BigCalc/)
+[公開ページ](https://krkrkrr.github.io/BigCalc/)
 
 `(1+1)*2` や `2**1000` が、計算できる電卓です。
 
@@ -22,7 +22,7 @@
 
 ## 作者 Author
 
-[@cool_omb](https://twitter.com/cool_omb)
+[@krrkrkrkrr](https://twitter.com/krrkrkrkrr)
 
 ## ライセンス Licence
 
